@@ -98,6 +98,8 @@ nav a:hover{color:var(--text)}
 .work .phone{width:100%;max-width:230px}
 .work b{font-size:15px}
 .work span{font-size:13px;color:var(--muted)}
+.phone video{width:100%;height:100%;object-fit:cover;display:block}
+.note{margin:28px 0 0;font-size:14px;color:var(--muted)}
 
 /* 진행 */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;counter-reset:s}
@@ -123,7 +125,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="wrap">
     <a class="logo" href="#top"><i aria-hidden="true"></i>로컬숏 스튜디오</a>
     <nav aria-label="주요 메뉴">
-      <a href="#services">서비스</a><a href="#styles">화풍</a><a href="#works">작업 예시</a><a href="#process">진행 방식</a>
+      <a href="#services">서비스</a><a href="#styles">화풍</a><a href="#works">작업 예시</a><a href="#samples">업종별 샘플</a><a href="#process">진행 방식</a>
       <a class="cta-link" href="#contact">문의하기</a>
     </nav>
   </div>
@@ -211,6 +213,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </div>
 </section>
 
+<section id="samples">
+  <div class="wrap">
+    <div class="eyebrow">업종별 샘플</div>
+    <h2>3D 동네 위로 사진이 날아드는 25초</h2>
+    <p class="lead">3D로 그린 동네에 가게 사진 6장이 한 장씩 날아들고, 2×3으로 모인 뒤 불 켜진 밤 장면으로 끝나요. 사진만 바꾸면 우리 가게 영상이 됩니다.</p>
+    <div class="works">
+      <div class="work"><div class="phone" data-mp4="video/sample_cafe.mp4"><img src="img/sample_cafe.jpg" alt="카페 사진 6장이 2×3으로 모인 장면" loading="lazy"></div><b>골목 안 작은 카페</b><span>라떼·디저트·핸드드립</span></div>
+      <div class="work"><div class="phone" data-mp4="video/sample_apt.mp4"><img src="img/sample_apt.jpg" alt="아파트 실내와 단지 사진 6장이 모인 장면" loading="lazy"></div><b>호수공원 앞 단지</b><span>매물·단지 소개</span></div>
+      <div class="work"><div class="phone" data-mp4="video/sample_food.mp4"><img src="img/sample_food.jpg" alt="고깃집 음식과 매장 사진 6장이 모인 장면" loading="lazy"></div><b>골목 고깃집</b><span>메뉴·매장 분위기</span></div>
+      <div class="work"><div class="phone" data-mp4="video/sample_fit.mp4"><img src="img/sample_fit.jpg" alt="필라테스·헬스장 사진 6장이 모인 장면" loading="lazy"></div><b>동네 필라테스·헬스</b><span>운동 공간 소개</span></div>
+    </div>
+    <p class="note">샘플 속 사진은 AI로 만든 예시 이미지예요. 실제 제작에는 가게에서 찍은 사진을 넣어요.</p>
+  </div>
+</section>
+
 <section id="process">
   <div class="wrap">
     <div class="eyebrow">진행 방식</div>
@@ -258,6 +275,15 @@ document.querySelectorAll(".phone[data-yt]").forEach(p => {
   b.setAttribute("aria-label", "영상 재생");
   b.addEventListener("click", () => {
     p.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${p.dataset.yt}?autoplay=1&playsinline=1" title="유튜브 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  });
+  p.appendChild(b);
+});
+// 샘플 영상은 사이트에 올린 mp4를 같은 방식으로 재생
+document.querySelectorAll(".phone[data-mp4]").forEach(p => {
+  const b = document.createElement("button");
+  b.setAttribute("aria-label", "샘플 영상 재생");
+  b.addEventListener("click", () => {
+    p.innerHTML = `<video src="${p.dataset.mp4}" autoplay controls playsinline></video>`;
   });
   p.appendChild(b);
 });
